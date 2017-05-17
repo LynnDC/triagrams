@@ -1,10 +1,19 @@
+"""Makes a set of trigrams to create a new body of text
+    provided text file."""
+import io
+
+
 def main(file, x):
-    read_file  = open(file).read()
+    """Opens file, splits it, grabs the desired chunk
+        and makes a dictionary out of the words"""
+    with io.open(file, encoding='utf=8') as test:
+        text = test.read()
 
-
-  output = []
-  for i in range(len(input)-n+1):
-    output.append(input[i:i+n])
-  return output
-
-[' '.join(x) for x in ngrams('a b c d', 2)]
+    text_split_by_spaces = text.split(' ')
+    text_chunk = text_split_by_spaces[:x]
+    # Logic goes here to remove undesired characters
+    text_dict = {}
+    for i in len(range(text_chunk) - 1):
+        text_dict.update(dict((' ').join(text_chunk[:][i],
+        text_chunk[:][i + 1]), text_chunk[:][i + 2]))
+    return text_dict

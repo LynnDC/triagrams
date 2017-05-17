@@ -1,1 +1,1 @@
-# triagrams
+# trigrams
