@@ -1,35 +1,41 @@
 """Makes a set of trigrams to create a new body of text
-    provided text file."""
+provided text file.
+"""
+
+
 import io
 import random
 
 
-def main(file, x):
+def main(doc, x):
     """Opens file, splits it, grabs the desired chunk
         and makes a dictionary out of the words"""
+    with io.open(doc, encoding='utf-8') as open_file:
+        text = open_file.read().split()
+    text_dict = parse_words(text)
+    generated_article = generate_article(text_dict, x)
+    print(' '.join(generated_article))
 
-    # This is going to be a separate function
-    with io.open(file, encoding='utf=8') as test:
-        text = test.read().split()
-    # Logic goes here to remove undesired characters
+
+def parse_words(words):
+    """Parses the text list into a dictionary.
+    """
     text_dict = {}
-    for i in range(len(text) - 2):
-        two_words = (' ').join(text[i: i + 2])
-        third_word = text[i + 2]
+    for i in range(len(words) - 2):
+        two_words = (' ').join(words[i: i + 2])
+        third_word = words[i + 2]
         if two_words in text_dict.keys():
-            if isinstance(text_dict[two_words], list):
-                text_dict[two_words].append(third_word)
-            else:
+            if not isinstance(text_dict[two_words], list):
                 text_dict[two_words] = [text_dict[two_words]]
-                text_dict[two_words].append(third_word)
+            text_dict[two_words].append(third_word)
         else:
             text_dict.setdefault(two_words, third_word)
     return text_dict
 
-    # main() will actually return our desired paragraph
-    # eventually
-
-    # using our text_dict, generate a paragraph with some starting words
+def generate_article(dicty, x):
+    """Generates a paragraph from startings words
+    and our dictionary from parse_words.
+    """
     paragraph = ['I', 'am']
     for _ in range(0, x):
         text_key = ' '.join(paragraph[-2:])
