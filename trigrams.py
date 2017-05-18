@@ -7,13 +7,11 @@ def main(file, x):
     """Opens file, splits it, grabs the desired chunk
         and makes a dictionary out of the words"""
     with io.open(file, encoding='utf=8') as test:
-        text = test.read()
-
-    text_split_by_spaces = text.split(' ')
-    text_chunk = text_split_by_spaces[:x]
+        text = test.read().split()
     # Logic goes here to remove undesired characters
     text_dict = {}
-    for i in len(range(text_chunk) - 1):
-        text_dict.update(dict((' ').join(text_chunk[:][i],
-        text_chunk[:][i + 1]), text_chunk[:][i + 2]))
+    for i in range(len(text) - x + 2):
+        two_words = (' ').join(text[i: i + 2])
+        third_word = text[i + 2]
+        text_dict.setdefault(two_words, third_word)
     return text_dict
