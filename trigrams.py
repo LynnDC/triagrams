@@ -1,6 +1,7 @@
 """Makes a set of trigrams to create a new body of text
     provided text file."""
 import io
+import random
 
 
 def main(file, x):
@@ -19,7 +20,7 @@ def main(file, x):
             if isinstance(text_dict[two_words], list):
                 text_dict[two_words].append(third_word)
             else:
-                text_dict[two_words] = list(text_dict[two_words])
+                text_dict[two_words] = [text_dict[two_words]]
                 text_dict[two_words].append(third_word)
         else:
             text_dict.setdefault(two_words, third_word)
@@ -27,3 +28,13 @@ def main(file, x):
 
     # main() will actually return our desired paragraph
     # eventually
+
+    # using our text_dict, generate a paragraph with some starting words
+    paragraph = ['I', 'am']
+    for _ in range(0, x):
+        text_key = ' '.join(paragraph[-2:])
+        if isinstance(text_dict[text_key], list):
+            paragraph.append(random.choice(text_dict[text_key]))
+        else:
+            paragraph.append(text_dict[text_key])
+    return paragraph
