@@ -8,7 +8,7 @@ import random
 import sys
 
 
-def main(doc, x):
+def main(doc, x): # pragma: no cover
     """Open file, splits it, grabs the desired chunk
         and makes a dictionary out of the words.
     """
