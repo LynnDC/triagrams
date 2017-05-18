@@ -9,7 +9,7 @@ def main(file, x):
         and makes a dictionary out of the words"""
 
     # This is going to be a separate function
-    with io.open(file, encoding='utf=8') as test:
+    with io.open(file, encoding='utf-8') as test:
         text = test.read().split()
     # Logic goes here to remove undesired characters
     text_dict = {}
@@ -38,3 +38,5 @@ def main(file, x):
         else:
             paragraph.append(text_dict[text_key])
     return paragraph
+
+    print(' '.join(paragraph))

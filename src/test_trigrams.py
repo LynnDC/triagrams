@@ -1,7 +1,6 @@
 import pytest
 
 
-
 def test_trigrams():
     """test trigrams function"""
     from trigrams import main
