@@ -5,11 +5,13 @@ provided text file.
 
 import io
 import random
+import sys
 
 
 def main(doc, x):
-    """Opens file, splits it, grabs the desired chunk
-        and makes a dictionary out of the words"""
+    """Open file, splits it, grabs the desired chunk
+        and makes a dictionary out of the words.
+    """
     with io.open(doc, encoding='utf-8') as open_file:
         text = open_file.read().split()
     text_dict = parse_words(text)
@@ -18,7 +20,7 @@ def main(doc, x):
 
 
 def parse_words(words):
-    """Parses the text list into a dictionary.
+    """Parse the text list into a dictionary.
     """
     text_dict = {}
     for i in range(len(words) - 2):
@@ -33,14 +35,17 @@ def parse_words(words):
     return text_dict
 
 def generate_article(dicty, x):
-    """Generates a paragraph from startings words
+    """Generate a paragraph from startings words
     and our dictionary from parse_words.
     """
     paragraph = ['I', 'am']
     for _ in range(0, x):
         text_key = ' '.join(paragraph[-2:])
-        if isinstance(text_dict[text_key], list):
-            paragraph.append(random.choice(text_dict[text_key]))
+        if isinstance(dicty[text_key], list):
+            paragraph.append(random.choice(dicty[text_key]))
         else:
-            paragraph.append(text_dict[text_key])
+            paragraph.append(dicty[text_key])
     return paragraph
+
+if __name__ == '__main__':
+    main(str(sys.argv[1]), int(sys.argv[2]))
