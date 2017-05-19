@@ -25,11 +25,16 @@ PARAMS_TABLE = [
 def test_parse_words(l, m, result):
     """test if our function will return a dictionary with 2 word key and a list or string value"""
     from trigrams import parse_words
-    # result = {"seattle weather": "is", "weather is": "crazy", "is crazy": "I", "I am": ["getting", "so"], "am getting": "fat", "fat and": "I", "so sleep": "oh", "oh my": "god"}
     a = (' ').join(l[m - 2:m])
     b = result
     c = parse_words(l)
     assert c[a] == b
 
 
-def test
+def test_generate_article():
+    """Test if generate_article gives a valid list of strings."""
+    from trigrams import generate_article, parse_words
+    with open('sherlock.txt') as sherlock:
+        result = parse_words(sherlock.read().split())
+    list_of_words = generate_article(result, 10)
+    assert len(list_of_words) == 10

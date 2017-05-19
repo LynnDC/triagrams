@@ -15,8 +15,14 @@ def main(doc, x): # pragma: no cover
     with io.open(doc, encoding='utf-8') as open_file:
         text = open_file.read().split()
     text_dict = parse_words(text)
-    generated_article = generate_article(text_dict, x)
-    print(' '.join(generated_article))
+    if x == 0:
+        return None
+    if x == 1:
+        print(random.choice(text))
+        return None
+    else:
+        generated_article = generate_article(text_dict, x)
+        print(' '.join(generated_article))
 
 
 def parse_words(words):
@@ -38,8 +44,10 @@ def generate_article(dicty, x):
     """Generate a paragraph from startings words
     and our dictionary from parse_words.
     """
-    paragraph = ['I', 'am']
-    for _ in range(0, x):
+    paragraph = []
+    text_key = random.choice(list(dicty.keys()))
+    paragraph.extend(text_key.split())
+    for _ in range(0, x-2):
         text_key = ' '.join(paragraph[-2:])
         if isinstance(dicty[text_key], list):
             paragraph.append(random.choice(dicty[text_key]))
